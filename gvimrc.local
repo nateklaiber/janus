@@ -1,0 +1,11 @@
+" Disable the toolbar and scroll bars
+set guioptions=egm
+
+set antialias
+
+set guifont=Droid\ Sans\ Mono:h12
+
+set linespace=-2
+set lines=405
+set columns=160
+set transparency=0
