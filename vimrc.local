@@ -76,7 +76,7 @@ imap <F6> <ESC>:set nolist!<CR>:set nolist?<CR>a
 fun! ClearAllTrailingSpaces()
   %s/\s\+$//
 endfun
-map \c :call ClearAllTrailingSpaces()<CR>
+map <leader>c :call ClearAllTrailingSpaces()<CR>
 
 " visual shifting (builtin-repeat)
 vnoremap < <gv
