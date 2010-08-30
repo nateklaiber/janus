@@ -82,6 +82,8 @@ map <leader>c :call ClearAllTrailingSpaces()<CR>
 vnoremap < <gv
 vnoremap > >gv
 
+" Setup vimwiki to store in dropbox
+let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/'}]
 
 
 
