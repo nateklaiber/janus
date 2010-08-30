@@ -92,6 +92,6 @@ set modelines=10
 color desert
 
 " Include user's local vim config
-if filereadable(expand("vimrc.local"))
-  source vimrc.local
+if filereadable(expand("~/.vim/vimrc.local"))
+  source ~/.vim/vimrc.local
 endif

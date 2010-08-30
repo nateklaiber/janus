@@ -129,6 +129,6 @@ call s:DefineCommand("rm", "Remove")
 call s:DefineCommand("e", "Edit")
 
 " Include user's local vim config
-if filereadable(expand("gvimrc.local"))
-  source gvimrc.local
+if filereadable(expand("~/.vim/gvimrc.local"))
+  source ~/.vim/gvimrc.local
 endif
