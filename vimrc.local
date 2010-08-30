@@ -2,8 +2,8 @@
 map <leader>d i------------------------------<ESC>:r ! date<CR>A<CR><CR><ESC>i
 
 " Edit and Resource the vim rc files
-map \vr :e ~/.vimrc<CR>
-map \gvr :e ~/.gvimrc<CR>
+map \vr :e ~/.vim/vimrc.local<CR>
+map \gvr :e ~/.vim/gvimrc.local<CR>
 nmap <leader>s :source $HOME/.vimrc<CR>:source $HOME/.gvimrc<CR>
 
 set switchbuf=useopen           " Reuse open buffers when opening a file that's already open
