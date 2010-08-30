@@ -41,7 +41,7 @@ nmap <C-e> $
 " :nnoremap <CR> :nohlsearch<CR>/<BS>
 
 " Repeat the last colon command in normal mode
-nnoremap <leader>. :<UP><CR>
+nnoremap ,. :<UP><CR>
 
 " Setup quick keys for virtual editing
 map <leader>ve :call VirtualEditToggle()<CR>
