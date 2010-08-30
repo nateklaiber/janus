@@ -9,6 +9,9 @@ nmap <leader>s :source $HOME/.vimrc<CR>:source $HOME/.gvimrc<CR>
 set switchbuf=useopen           " Reuse open buffers when opening a file that's already open
 set cmdheight=2                 " Set the command window height to be 2
 
+" Turn off line numbers
+set nonumber
+
 " Status line setup
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
