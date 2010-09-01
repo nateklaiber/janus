@@ -6,6 +6,12 @@ map \vr :e ~/.vim/vimrc.local<CR>
 map \gvr :e ~/.vim/gvimrc.local<CR>
 nmap <leader>s :source $HOME/.vimrc<CR>:source $HOME/.gvimrc<CR>
 
+" Turn of highlighting after search
+map <C-l> :noh<CR>
+
+" Change key for toggling list items in vimwiki
+map <C-S-Space> :VimwikiToggleListItem<CR>
+
 set switchbuf=useopen           " Reuse open buffers when opening a file that's already open
 set cmdheight=2                 " Set the command window height to be 2
 
