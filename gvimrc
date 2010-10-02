@@ -30,8 +30,8 @@ function StartTerm()
 endfunction
 
 " Project Tree
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
+" autocmd VimEnter * NERDTree
+" autocmd VimEnter * wincmd p
 autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
 
 " Disable netrw's autocmd, since we're ALWAYS using NERDTree
