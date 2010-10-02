@@ -34,6 +34,9 @@ set directory=/tmp      " Where temporary files will go.
 set splitright
 set splitbelow
 
+" I don't want to cycle through the list
+set wildmode=list:longest
+
 " Keep more context when scrolling at the end or beginning of the buffer
 set scrolloff=5
 
