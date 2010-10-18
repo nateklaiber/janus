@@ -46,6 +46,16 @@ imap <C-e> <C-o>$
 nmap <C-a> ^
 nmap <C-e> $
 
+" Turn on folding for vimwiki
+map <leader>wf :call VimWikiFoldingToggle()<CR>
+function! VimWikiFoldingToggle()
+  if g:vimwiki_folding == 1
+    let g:vimwiki_folding=0
+  else
+    let g:vimwiki_folding=1
+  endif
+endfunction
+
 " clear the search buffer when hitting return
 " :nnoremap <CR> :nohlsearch<CR>/<BS>
 
