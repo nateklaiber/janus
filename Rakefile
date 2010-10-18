@@ -45,9 +45,33 @@ def vim_plugin_task(name, repo=nil)
           sh "mv #{dirname} #{dir}"
 
         when /vba(\.gz)?$/
-          system "vim -c 'so %' -c 'q' tmp/#{filename}"
-          rm "tmp/#{File.basename(filename, '.gz')}" if filename =~ /gz$/
-          mkdir_p dir # TODO: hax, this needs to exist for :install task later
+          if filename =~ /gz$/
+            sh "gunzip -f tmp/#{filename}"
+            filename = File.basename(filename, '.gz')
+          end
+
+          # TODO: move this into the install task
+          mkdir_p dir
+          lines = File.readlines("tmp/#{filename}")
+          current = lines.shift until current =~ /finish$/ # find finish line
+
+          while current = lines.shift
+            # first line is the filename, followed by some unknown data
+            file = current[/^(.+?)\s+\[\[\[(\d+)$/, 1]
+
+            # then the size of the payload in lines
+            current = lines.shift
+            num_lines = current[/^(\d+)$/, 1].to_i
+
+            # the data itself
+            data = lines.slice!(0, num_lines)
+
+            # install the data
+            Dir.chdir dir do
+              mkdir_p File.dirname(file)
+              File.open(file, 'w'){ |f| f.write(data) }
+            end
+          end
         end
       end
 
@@ -118,6 +142,7 @@ vim_plugin_task "zoomwin",          "http://www.vim.org/scripts/download_script.
 vim_plugin_task "snipmate",         "http://github.com/msanders/snipmate.vim.git"
 vim_plugin_task "autoclose",        "http://github.com/Townk/vim-autoclose.git"
 vim_plugin_task "markdown",         "http://github.com/tpope/vim-markdown.git"
+vim_plugin_task "align",            "http://github.com/tsaleh/vim-align.git"
 vim_plugin_task "vimwiki",          "http://www.vim.org/scripts/download_script.php?src_id=13667"
 
 vim_plugin_task "command_t",        "http://github.com/wincent/Command-T.git" do
