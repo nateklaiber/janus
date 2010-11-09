@@ -4,6 +4,15 @@ set nonumber
 set ruler
 syntax on
 
+"don't clutter my directories with swap files, bitch!
+set nobackup
+set nowritebackup
+set noswapfile
+
+
+" Default color scheme
+color desert
+
 " Whitespace stuff
 set nowrap
 set tabstop=2
@@ -27,6 +36,8 @@ set laststatus=2
 " NERDTree configuration
 " let NERDTreeIgnore=['\.rbc$', '\~$']
 " map <Leader>n :NERDTreeToggle<CR>
+
+let mapleader = ","
 
 " Command-T configuration
 let g:CommandTMaxHeight=20
@@ -88,8 +99,6 @@ cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 set modeline
 set modelines=10
 
-" Default color scheme
-color desert
 
 " Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
