@@ -1,6 +1,6 @@
 set nocompatible
 
-set number
+set nonumber
 set ruler
 syntax on
 
@@ -25,8 +25,8 @@ set wildignore+=*.o,*.obj,.git,*.rbc
 set laststatus=2
 
 " NERDTree configuration
-let NERDTreeIgnore=['\.rbc$', '\~$']
-map <Leader>n :NERDTreeToggle<CR>
+" let NERDTreeIgnore=['\.rbc$', '\~$']
+" map <Leader>n :NERDTreeToggle<CR>
 
 " Command-T configuration
 let g:CommandTMaxHeight=20
