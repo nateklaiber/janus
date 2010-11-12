@@ -9,6 +9,9 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+set cursorline                "highlight current line
+set cursorcolumn              "highlight current column
+
 
 " Default color scheme
 color desert

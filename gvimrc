@@ -21,7 +21,8 @@ endif
 set guioptions-=T
 
 " Default gui color scheme
-color molokai
+color desert
+" color molokai
 
 " ConqueTerm wrapper
 function StartTerm()
@@ -30,9 +31,9 @@ function StartTerm()
 endfunction
 
 " Project Tree
-autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
-autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
+" autocmd VimEnter * NERDTree
+" autocmd VimEnter * wincmd p
+" autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
 
 " Disable netrw's autocmd, since we're ALWAYS using NERDTree
 runtime plugin/netRwPlugin.vim
