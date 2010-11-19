@@ -4,6 +4,8 @@ set nonumber
 set ruler
 syntax on
 
+" set statusline=[%n]\ %<%.99f\ %h%w%m%r%y%{exists('g:loaded_rvm')?Rvm#statusline():''}%=%-16(\ %l,%c-%v\ %)%P
+
 "don't clutter my directories with swap files, bitch!
 set nobackup
 set nowritebackup
@@ -11,6 +13,8 @@ set noswapfile
 
 set cursorline                "highlight current line
 set cursorcolumn              "highlight current column
+
+nnoremap <C-L> :nohls<CR><C-L>
 
 
 " Default color scheme
