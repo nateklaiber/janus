@@ -78,7 +78,7 @@ def vim_plugin_task(name, repo=nil)
       task :pull => dir do
         if repo =~ /git$/
           Dir.chdir dir do
-            sh "git pull"
+            sh "git pull origin master"
           end
         end
       end
