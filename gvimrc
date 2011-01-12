@@ -1,11 +1,13 @@
-" Fullscreen takes up entire screen
-set fuoptions=maxhorz,maxvert
 
 
 if has("gui_macvim")
+  " Fullscreen takes up entire screen
+  set fuoptions=maxhorz,maxvert
+
   " Command-T for CommandT
   macmenu &File.New\ Tab key=<nop>
   map <D-t> :CommandT<CR>
+  imap <D-t> <Esc>:CommandT<CR>
 
   " Command-Shift-F for Ack
   macmenu Window.Toggle\ Full\ Screen\ Mode key=<nop>
@@ -16,14 +18,17 @@ if has("gui_macvim")
 
   " Command-/ to toggle comments
   map <D-/> <plug>NERDCommenterToggle<CR>
+
+  " Command-][ to increase/decrease indentation
+  vmap <D-]> >gv
+  vmap <D-[> <gv
 endif
 
 " Start without the toolbar
 set guioptions-=T
 
 " Default gui color scheme
-color desert
-" color molokai
+color ir_black
 
 " ConqueTerm wrapper
 function StartTerm()
@@ -32,34 +37,63 @@ function StartTerm()
 endfunction
 
 " Project Tree
-" autocmd VimEnter * NERDTree
-" autocmd VimEnter * wincmd p
-" autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
+autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
+autocmd FocusGained * call s:UpdateNERDTree()
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
-" Disable netrw's autocmd, since we're ALWAYS using NERDTree
-runtime plugin/netRwPlugin.vim
-augroup FileExplorer
-  au!
-augroup END
-
-let g:NERDTreeHijackNetrw = 0
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
 
 " If the parameter is a directory, cd into it
 function s:CdIfDirectory(directory)
-  if isdirectory(a:directory)
-    call ChangeDirectory(a:directory)
+  let explicitDirectory = isdirectory(a:directory)
+  let directory = explicitDirectory || empty(a:directory)
+
+  if explicitDirectory
+    exe "cd " . a:directory
+  endif
+
+  if directory
+    NERDTree
+    wincmd p
+    bd
+  endif
+
+  if explicitDirectory
+    wincmd p
   endif
 endfunction
 
 " NERDTree utility function
-function s:UpdateNERDTree(stay)
+function s:UpdateNERDTree(...)
+  let stay = 0
+
+  if(exists("a:1"))
+    let stay = a:1
+  end
+
   if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      NERDTree
-      if !a:stay
+    let nr = bufwinnr(t:NERDTreeBufName)
+    if nr != -1
+      exe nr . "wincmd w"
+      exe substitute(mapcheck("R"), "<CR>", "", "")
+      if !stay
         wincmd p
       end
     endif
+  endif
+
+  if exists(":CommandTFlush") == 2
+    CommandTFlush
   endif
 endfunction
 
@@ -87,12 +121,17 @@ endfunction
 function ChangeDirectory(dir, ...)
   execute "cd " . a:dir
   let stay = exists("a:1") ? a:1 : 1
-  call s:UpdateNERDTree(stay)
+
+  NERDTree
+
+  if !stay
+    wincmd p
+  endif
 endfunction
 
 function Touch(file)
   execute "!touch " . a:file
-  call s:UpdateNERDTree(1)
+  call s:UpdateNERDTree()
 endfunction
 
 function Remove(file)
@@ -104,6 +143,13 @@ function Remove(file)
   else
     execute "!rm " . a:file
   endif
+
+  call s:UpdateNERDTree()
+endfunction
+
+function Mkdir(file)
+  execute "!mkdir " . a:file
+  call s:UpdateNERDTree()
 endfunction
 
 function Edit(file)
@@ -129,6 +175,7 @@ call s:DefineCommand("cd", "ChangeDirectory")
 call s:DefineCommand("touch", "Touch")
 call s:DefineCommand("rm", "Remove")
 call s:DefineCommand("e", "Edit")
+call s:DefineCommand("mkdir", "Mkdir")
 
 " Include user's local vim config
 if filereadable(expand("~/.gvimrc.local"))
