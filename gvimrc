@@ -29,7 +29,7 @@ set guioptions-=T
 
 " Default gui color scheme
 "color ir_black
-color molakai
+color desert
 
 " ConqueTerm wrapper
 function StartTerm()
