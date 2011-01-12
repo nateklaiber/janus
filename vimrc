@@ -1,6 +1,7 @@
 set nocompatible
 
-set nonumber
+set number
+set backupskip=/tmp/*,/private/tmp/*
 set ruler
 syntax on
 

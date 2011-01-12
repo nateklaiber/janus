@@ -28,7 +28,8 @@ endif
 set guioptions-=T
 
 " Default gui color scheme
-color ir_black
+"color ir_black
+color molakai
 
 " ConqueTerm wrapper
 function StartTerm()
@@ -37,9 +38,9 @@ function StartTerm()
 endfunction
 
 " Project Tree
-autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
-autocmd FocusGained * call s:UpdateNERDTree()
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+"autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
+"autocmd FocusGained * call s:UpdateNERDTree()
+"autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 " Close all open buffers on entering a window if the only
 " buffer that's left is the NERDTree buffer
