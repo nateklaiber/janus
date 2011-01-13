@@ -1,5 +1,10 @@
 set nocompatible
 
+command! W :w
+command! Q :q
+command! WQ :wq
+command! Wq :wq
+
 set number
 set backupskip=/tmp/*,/private/tmp/*
 set ruler
