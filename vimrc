@@ -1,3 +1,5 @@
+set rubydll=/usr/local/lib/libruby.2.0.dylib
+set luadll=/usr/local/Cellar/lua52/5.2.1/lib/liblua.dylib
 set nocompatible
 
 command! W :w
@@ -24,7 +26,8 @@ nnoremap <C-L> :nohls<CR><C-L>
 
 
 " Default color scheme
-color desert
+"color desert
+color macvim
 
 " Whitespace stuff
 set nowrap
@@ -87,6 +90,9 @@ endfunction
 " make and python use real tabs
 au FileType make                                     set noexpandtab
 au FileType python                                   set noexpandtab
+
+" Prawn read as ruby
+au BufNewFile,BufRead *.prawn set filetype=ruby
 
 " Thorfile, Rakefile and Gemfile are Ruby
 au BufRead,BufNewFile {Gemfile,Rakefile,Thorfile,config.ru}    set ft=ruby
